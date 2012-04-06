@@ -82,11 +82,13 @@ class vEvent(object):
             soup = subs if subs else [soup]
             content = ''
             for elem in soup:
-                if elem.name == 'abbr':
+                if elem.name == 'a' and 'href' in elem.attrs:
+                    content += elem['href']
+                elif elem.name == 'abbr' and 'title' in elem.attrs:
                     content += elem['title']
-                elif elem.name == 'time':
+                elif elem.name == 'time' and 'datetime' in elem.attrs:
                     content += elem['datetime']
-                elif elem.name in ['img', 'area']:
+                elif elem.name in ['img', 'area'] and 'alt' in elem.attrs:
                     content += elem['alt']
                 else:
                     content += self._getContent(elem)
