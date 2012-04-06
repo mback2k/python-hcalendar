@@ -42,4 +42,10 @@ The hCalendar class accepts file-like objects and strings, basically anything su
             print event.dtend
             print event.location
 
-HTML source code taken from [microformats.org](http://microformats.org/wiki/hcalendar)
+HTML source code taken from [microformats.org](http://microformats.org/wiki/hcalendar). Output will look like this:
+
+    http://conferences.oreillynet.com/pub/w/40/program.html
+    Web 2.0 Conference
+    2005-10-05 00:00:00
+    2005-10-07 00:00:00
+    Argent Hotel, San Francisco, CA
