@@ -1,9 +1,8 @@
-from dateutil.parser import parse
-from bs4 import BeautifulSoup
+import re, bs4, isodate, datetime
 
 class hCalendar(object):
     def __init__(self, markup):
-        self._soup = BeautifulSoup(markup)
+        self._soup = bs4.BeautifulSoup(markup)
         self._cals = self._soup.findAll(attrs='vcalendar')
         if self._cals:
             self._cals = map(vCalendar, self._cals)
@@ -43,13 +42,20 @@ class vCalendar(object):
         return self._events
 
 class vEvent(object):
-    ATTR_DATETIME = ('dtstart', 'dtend', 'dtstamp', 'last_modified')
-    ATTR_CONTENT  = ('summary', 'description', 'location', 'category', 'status', 'duration', 'method', 'uid', 'url')
+    ATTR_CONTENT  = ('summary', 'description', 'location', 'category', 'status', 'method', 'uid', 'url')
+    ATTR_DATETIME = ('dtstart', 'dtend', 'dtstamp')
+    ATTR_DURATION = ('duration',)
+    ATTR_RELATION = {'duration': 'dtstart'}
+    ATTR_FALLBACK = {'dtend': 'duration'}
+
+    REGEX_DATE = re.compile(r'P(\d{4})-(\d{2})-(\d{2})')
+    REGEX_DATETIME = re.compile(r'P(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})')
 
     def __init__(self, soup):
         self._soup = soup
         self._content = {}
         self._datetime = {}
+        self._duration = {}
         
     def __str__(self):
         return str(self._soup)
@@ -59,19 +65,50 @@ class vEvent(object):
         
     def __getattr__(self, attr):
         if attr in self.ATTR_DATETIME:
-            return self.getDatetime(attr.replace('_', '-'))
+            value = self.getDatetime(attr.replace('_', '-'))
+        elif attr in self.ATTR_DURATION:
+            value = self.getDuration(attr.replace('_', '-'))
         elif attr in self.ATTR_CONTENT:
-            return self.getContent(attr)
-        raise AttributeError
+            value = self.getContent(attr)
+        if not value and attr in self.ATTR_FALLBACK:
+            value = getattr(self, self.ATTR_FALLBACK[attr])
+        if not attr in list(self.ATTR_CONTENT + self.ATTR_DATETIME + self.ATTR_DURATION):
+            raise AttributeError
+        return value
 
     def getDatetime(self, attr):
         if not attr in self._datetime:
             content = self.getContent(attr)
             if content:
-                self._datetime[attr] = parse(content)
+                if not 'T' in content:
+                    value = isodate.parse_date(content)
+                else:
+                    value = isodate.parse_datetime(content)
+                if isinstance(value, datetime.date):
+                    self._datetime[attr] = datetime.datetime(value.year, value.month, value.day)
+                else:
+                    self._datetime[attr] = value
             else:
                 self._datetime[attr] = None
         return self._datetime[attr]
+
+    def getDuration(self, attr):
+        if not attr in self._duration:
+            content = self.getContent(attr)
+            if content and attr in self.ATTR_RELATION:
+                if self.REGEX_DATETIME.match(content):
+                    content = self.REGEX_DATETIME.sub(r'P\1Y\2M\3DT\4H\5M\6S', content)
+                elif self.REGEX_DATE.match(content):
+                    content = self.REGEX_DATE.sub(r'P\1Y\2M\3D', content)
+                relation = getattr(self, self.ATTR_RELATION[attr])
+                value = isodate.parse_duration(content)
+                if isinstance(value, isodate.duration.Duration):
+                    self._duration[attr] = value.tdelta + relation + datetime.timedelta(days=365*value.years) + datetime.timedelta(days=30*value.months)
+                else:
+                    self._duration[attr] = value + relation
+            else:
+                self._duration[attr] = None
+        return self._duration[attr]
 
     def getContent(self, attr):
         if not attr in self._content:
