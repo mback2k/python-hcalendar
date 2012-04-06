@@ -3,56 +3,56 @@ from bs4 import BeautifulSoup
 
 class hCalendar(object):
     def __init__(self, markup):
-        self.soup = BeautifulSoup(markup)
-        self.cals = self.soup.findAll(attrs='vcalendar')
-        if self.cals:
-            self.cals = map(vCalendar, self.cals)
+        self._soup = BeautifulSoup(markup)
+        self._cals = self._soup.findAll(attrs='vcalendar')
+        if self._cals:
+            self._cals = map(vCalendar, self._cals)
         else:
-            self.cals = [vCalendar(self.soup)]
+            self._cals = [vCalendar(self._soup)]
 
     def __len__(self):
-        return len(self.cals)
+        return len(self._cals)
 
     def __iter__(self):
-        return iter(self.cals)
+        return iter(self._cals)
 
     def __getitem__(self, key):
-        return self.cals[key]
+        return self._cals[key]
 
     def getCalendar(self):
-        return self.cals
+        return self._cals
 
 class vCalendar(object):
     def __init__(self, soup):
-        self.soup = soup
-        self.events = map(vEvent, self.soup.findAll(attrs='vevent'))
+        self._soup = soup
+        self._events = map(vEvent, self._soup.findAll(attrs='vevent'))
 
     def __str__(self):
-        return str(self.soup)
+        return str(self._soup)
 
     def __len__(self):
-        return len(self.events)
+        return len(self._events)
 
     def __iter__(self):
-        return iter(self.events)
+        return iter(self._events)
 
     def __getitem__(self, key):
-        return self.events[key]
+        return self._events[key]
 
     def getEvents(self):
-        return self.events
+        return self._events
 
 class vEvent(object):
     ATTR_DATETIME = ('dtstart', 'dtend', 'dtstamp', 'last_modified')
     ATTR_CONTENT  = ('summary', 'description', 'location', 'category', 'status', 'duration', 'method', 'uid', 'url')
 
     def __init__(self, soup):
-        self.soup = soup
-        self.content = {}
-        self.datetime = {}
+        self._soup = soup
+        self._content = {}
+        self._datetime = {}
         
     def __str__(self):
-        return str(self.soup)
+        return str(self._soup)
         
     def __dir__(self):
         return list(self.ATTR_CONTENT + self.ATTR_DATETIME)
@@ -65,17 +65,17 @@ class vEvent(object):
         raise AttributeError
 
     def getDatetime(self, attr):
-        if not attr in self.datetime:
+        if not attr in self._datetime:
             content = self.getContent(attr)
             if content:
-                self.datetime[attr] = parse(content)
+                self._datetime[attr] = parse(content)
             else:
-                self.datetime[attr] = None
-        return self.datetime[attr]
+                self._datetime[attr] = None
+        return self._datetime[attr]
 
     def getContent(self, attr):
-        if not attr in self.content:
-            soup = self.soup.find(attrs=attr)
+        if not attr in self._content:
+            soup = self._soup.find(attrs=attr)
             if not soup:
                 return None
             subs = soup.findAll(attrs='value')
@@ -90,8 +90,8 @@ class vEvent(object):
                     content += elem['alt']
                 else:
                     content += self._getContent(elem)
-            self.content[attr] = content
-        return self.content[attr]
+            self._content[attr] = content
+        return self._content[attr]
 
     def _getContent(self, soup):
         if soup.string:
