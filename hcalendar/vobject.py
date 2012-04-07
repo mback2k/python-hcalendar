@@ -42,8 +42,15 @@ class vObject(object):
                 fallback_value = getattr(self, fallback_attr)
                 if fallback_value and fallback_attr in self.ATTR_DATETIME_RELATION:
                     relation_attr = self.ATTR_DATETIME_RELATION[fallback_attr]
-                    relation_value = getattr(self, relation_attr)
-                    fallback_value += relation_value
+                    if relation_attr.startswith('+'):
+                        relation_value = getattr(self, relation_attr[1:])
+                        fallback_value = relation_value + fallback_value
+                    elif relation_attr.startswith('-'):
+                        relation_value = getattr(self, relation_attr[1:])
+                        fallback_value = relation_value - fallback_value
+                    else:
+                        relation_value = getattr(self, relation_attr)
+                        fallback_value += relation_value
                 self._datetime[attr] = fallback_value
             else:
                 self._datetime[attr] = None

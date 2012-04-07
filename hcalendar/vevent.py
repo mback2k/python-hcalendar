@@ -6,7 +6,7 @@ class vEvent(vObject):
     ATTR_DURATION = ('duration',)
     ATTR_RULE     = ('rrule', 'exrule')
 
-    ATTR_DATETIME_RELATION = {'duration': 'dtstart'}
+    ATTR_DATETIME_RELATION = {'duration': '+dtstart'}
     ATTR_DATETIME_FALLBACK = {'dtend': 'duration'}
 
     def __dir__(self):
