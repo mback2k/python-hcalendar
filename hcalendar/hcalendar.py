@@ -1,9 +1,12 @@
-import bs4
 from vcalendar import vCalendar
+from bs4 import BeautifulSoup
 
 class hCalendar(object):
     def __init__(self, markup, value=None, key='id'):
-        self._soup = bs4.BeautifulSoup(markup)
+        if isinstance(markup, BeautifulSoup):
+            self._soup = markup
+        else:
+            self._soup = BeautifulSoup(markup)
         if value:
             self._soup = self._soup.find(**{key: value})
         self._cals = self._soup.findAll(attrs='vcalendar')
