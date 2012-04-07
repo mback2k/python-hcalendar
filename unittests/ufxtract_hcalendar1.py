@@ -10,7 +10,7 @@ class hCalendar1(UfXtractSetup):
 
     def test_02(self):
         self.assertEqual(self.data[0][0]['duration'], 'P2D')
-        self.assertEqual(self.data[0][0].duration, datetime.datetime(year=2007, month=9, day=10))
+        self.assertEqual(self.data[0][0].duration, datetime.timedelta(days=2))
 
     def test_03(self):
         self.assertEqual(self.data[0][0]['dtstart'], '2007-09-08')

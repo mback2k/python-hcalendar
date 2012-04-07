@@ -6,8 +6,8 @@ class vEvent(vObject):
     ATTR_DURATION = ('duration',)
     ATTR_RULE     = ('rrule', 'exrule')
 
-    ATTR_RELATION = {'duration': 'dtstart'}
-    ATTR_FALLBACK = {'dtend': 'duration'}
+    ATTR_DATETIME_RELATION = {'duration': 'dtstart'}
+    ATTR_DATETIME_FALLBACK = {'dtend': 'duration'}
 
     def __dir__(self):
         return list(self.ATTR_CONTENT + self.ATTR_DATETIME + self.ATTR_RULE)
@@ -24,8 +24,6 @@ class vEvent(vObject):
             value = self.getContent(attr)
         else:
             raise AttributeError
-        if not value and attr in self.ATTR_FALLBACK:
-            value = getattr(self, self.ATTR_FALLBACK[attr])
         return value
 
 class vRule(vObject):

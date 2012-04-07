@@ -4,7 +4,8 @@ class vObject(object):
     REGEX_DATE = re.compile(r'P(\d{4})-(\d{2})-(\d{2})')
     REGEX_DATETIME = re.compile(r'P(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})')
 
-    ATTR_RELATION = {}
+    ATTR_DATETIME_RELATION = {}
+    ATTR_DATETIME_FALLBACK = {}
 
     def __init__(self, soup):
         self._soup = soup
@@ -36,6 +37,14 @@ class vObject(object):
                     self._datetime[attr] = datetime.datetime(value.year, value.month, value.day)
                 else:
                     self._datetime[attr] = value
+            elif attr in self.ATTR_DATETIME_FALLBACK:
+                fallback_attr = self.ATTR_DATETIME_FALLBACK[attr]
+                fallback_value = getattr(self, fallback_attr)
+                if fallback_attr in self.ATTR_DATETIME_RELATION:
+                    relation_attr = self.ATTR_DATETIME_RELATION[fallback_attr]
+                    relation_value = getattr(self, relation_attr)
+                    fallback_value += relation_value
+                self._datetime[attr] = fallback_value
             else:
                 self._datetime[attr] = None
         return self._datetime[attr]
@@ -43,17 +52,16 @@ class vObject(object):
     def getDuration(self, attr):
         if not attr in self._duration:
             content = self.getContent(attr)
-            if content and attr in self.ATTR_RELATION:
+            if content:
                 if self.REGEX_DATETIME.match(content):
                     content = self.REGEX_DATETIME.sub(r'P\1Y\2M\3DT\4H\5M\6S', content)
                 elif self.REGEX_DATE.match(content):
                     content = self.REGEX_DATE.sub(r'P\1Y\2M\3D', content)
-                relation = getattr(self, self.ATTR_RELATION[attr])
                 value = isodate.parse_duration(content)
                 if isinstance(value, isodate.duration.Duration):
-                    self._duration[attr] = value.tdelta + relation + datetime.timedelta(days=365*value.years) + datetime.timedelta(days=30*value.months)
+                    self._duration[attr] = value.tdelta + datetime.timedelta(days=365*value.years) + datetime.timedelta(days=30*value.months)
                 else:
-                    self._duration[attr] = value + relation
+                    self._duration[attr] = value
             else:
                 self._duration[attr] = None
         return self._duration[attr]
