@@ -22,10 +22,10 @@ class vEvent(vObject):
             value = self.getDuration(attr.replace('_', '-'))
         elif attr in self.ATTR_CONTENT:
             value = self.getContent(attr)
+        else:
+            raise AttributeError
         if not value and attr in self.ATTR_FALLBACK:
             value = getattr(self, self.ATTR_FALLBACK[attr])
-        if not attr in list(self.ATTR_CONTENT + self.ATTR_DATETIME + self.ATTR_DURATION + self.ATTR_RULE):
-            raise AttributeError
         return value
 
 class vRule(vObject):
