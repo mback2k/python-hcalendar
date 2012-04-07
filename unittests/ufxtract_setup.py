@@ -7,6 +7,7 @@ class UfXtractSetup(unittest.TestCase):
         self.data = hCalendar(self.file, 'uf')
 
     def tearDown(self):
+        self.data = None
         self.file.close()
         self.file = None
 
