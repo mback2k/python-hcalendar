@@ -33,9 +33,9 @@ class vRule(vObject):
     def __str__(self):
         freq = getattr(self, 'freq')
         if freq:
-            rrule = self._getRule(freq)
+            rrule = self.getRule(freq)
         else:
-            rrule = self._getContent()
+            rrule = self.getContentFromSoup()
         return rrule.upper()
 
     def __dir__(self):
@@ -50,7 +50,7 @@ class vRule(vObject):
             value = value[:self.ATTR_TRIM[attr]]
         return value
 
-    def _getRule(self, freq):
+    def getRule(self, freq):
         rrule = 'FREQ=%s' % freq
         for key in self.ATTR_KEYS[1:]:
             value = getattr(self, key)
