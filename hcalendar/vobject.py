@@ -40,7 +40,7 @@ class vObject(object):
             elif attr in self.ATTR_DATETIME_FALLBACK:
                 fallback_attr = self.ATTR_DATETIME_FALLBACK[attr]
                 fallback_value = getattr(self, fallback_attr)
-                if fallback_attr in self.ATTR_DATETIME_RELATION:
+                if fallback_value and fallback_attr in self.ATTR_DATETIME_RELATION:
                     relation_attr = self.ATTR_DATETIME_RELATION[fallback_attr]
                     relation_value = getattr(self, relation_attr)
                     fallback_value += relation_value
