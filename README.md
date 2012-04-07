@@ -49,3 +49,9 @@ HTML source code taken from [microformats.org](http://microformats.org/wiki/hcal
     2005-10-05 00:00:00
     2005-10-07 00:00:00
     Argent Hotel, San Francisco, CA
+
+TODO
+====
+- Implement support for hCard contacts and attendees
+- Implement support for geo locations
+- Maybe support for other microformats?
