@@ -15,6 +15,9 @@ class vObject(object):
     def __str__(self):
         return str(self._soup)
 
+    def __getitem__(self, attr):
+        return self.getContent(attr)
+
     def getDatetime(self, attr):
         if not attr in self._datetime:
             content = self.getContent(attr)
