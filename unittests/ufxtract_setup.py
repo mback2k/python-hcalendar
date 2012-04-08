@@ -3,7 +3,7 @@ import unittest, urllib2
 
 class UfXtractSetup(unittest.TestCase):
     def setUp(self):
-        self.file = urllib2.urlopen(urllib2.Request(self.href, headers={'User-agent': 'WebGCal UnitTest'}))
+        self.file = urllib2.urlopen(urllib2.Request(self.href, headers={'User-agent': 'Python hCalendar UnitTest'}))
         self.data = hCalendar(self.file, 'uf')
 
     def tearDown(self):
