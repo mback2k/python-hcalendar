@@ -23,20 +23,23 @@ class vObject(object):
         if not attr in self._datetime:
             content = self.getContent(attr)
             if content:
-                content = content.replace(' ', 'T')
-                if not 'T' in content:
-                    if ':' in content:
-                        value = isodate.parse_time(content)
+                try:
+                    content = content.replace(' ', 'T')
+                    if not 'T' in content:
+                        if ':' in content:
+                            value = isodate.parse_time(content)
+                        else:
+                            value = isodate.parse_date(content)
                     else:
-                        value = isodate.parse_date(content)
-                else:
-                    value = isodate.parse_datetime(content)
-                if type(value) is datetime.time:
-                    self._datetime[attr] = datetime.datetime.min.replace(hour=value.hour, minute=value.minute, second=value.second, microsecond=value.microsecond, tzinfo=value.tzinfo)
-                elif type(value) is datetime.date:
-                    self._datetime[attr] = datetime.datetime(value.year, value.month, value.day)
-                else:
-                    self._datetime[attr] = value
+                        value = isodate.parse_datetime(content)
+                    if type(value) is datetime.time:
+                        self._datetime[attr] = datetime.datetime.min.replace(hour=value.hour, minute=value.minute, second=value.second, microsecond=value.microsecond, tzinfo=value.tzinfo)
+                    elif type(value) is datetime.date:
+                        self._datetime[attr] = datetime.datetime(value.year, value.month, value.day)
+                    else:
+                        self._datetime[attr] = value
+                except isodate.ISO8601Error:
+                    self._datetime[attr] = None
             elif attr in self.ATTR_DATETIME_FALLBACK:
                 fallback_attr = self.ATTR_DATETIME_FALLBACK[attr]
                 fallback_value = getattr(self, fallback_attr)
