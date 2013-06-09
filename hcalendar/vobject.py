@@ -35,7 +35,7 @@ class vObject(object):
                     if type(value) is datetime.time:
                         self._datetime[attr] = datetime.datetime.min.replace(hour=value.hour, minute=value.minute, second=value.second, microsecond=value.microsecond, tzinfo=value.tzinfo)
                     elif type(value) is datetime.date:
-                        self._datetime[attr] = datetime.datetime(value.year, value.month, value.day)
+                        self._datetime[attr] = datetime.datetime(value.year, value.month, value.day, tzinfo=isodate.parse_tzinfo('Z'))
                     else:
                         self._datetime[attr] = value
                 except isodate.ISO8601Error:
