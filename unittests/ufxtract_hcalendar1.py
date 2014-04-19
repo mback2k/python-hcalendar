@@ -1,9 +1,10 @@
 # Inspired by https://github.com/glennjones/UfXtract/blob/master/UfXtractUnitTests/test_hCalendar_1.cs
 from ufxtract_setup import UfXtractSetup
-import datetime
+import isodate, datetime
 
 class hCalendar1(UfXtractSetup):
     href = 'http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm'
+    zone = isodate.parse_tzinfo('Z')
 
     def test_01(self):
         self.assertEqual(self.data[0][0].summary, 'Barcamp Brighton 1')
@@ -14,11 +15,11 @@ class hCalendar1(UfXtractSetup):
 
     def test_03(self):
         self.assertEqual(self.data[0][0]['dtstart'], '2007-09-08')
-        self.assertEqual(self.data[0][0].dtstart, datetime.datetime(year=2007, month=9, day=8))
+        self.assertEqual(self.data[0][0].dtstart, datetime.datetime(year=2007, month=9, day=8, tzinfo=self.zone))
 
     def test_04(self):
         self.assertEqual(self.data[0][0]['dtend'], '2007-09-09')
-        self.assertEqual(self.data[0][0].dtend, datetime.datetime(year=2007, month=9, day=9))
+        self.assertEqual(self.data[0][0].dtend, datetime.datetime(year=2007, month=9, day=9, tzinfo=self.zone))
 
     def test_05(self):
         self.assertEqual(self.data[0][0].location, 'Madgex Office, Brighton')
@@ -34,11 +35,11 @@ class hCalendar1(UfXtractSetup):
 
     def test_09(self):
         self.assertEqual(self.data[0][0]['dtstamp'], '2007-05-01')
-        self.assertEqual(self.data[0][0].dtstamp, datetime.datetime(year=2007, month=5, day=1))
+        self.assertEqual(self.data[0][0].dtstamp, datetime.datetime(year=2007, month=5, day=1, tzinfo=self.zone))
 
     def test_10(self):
         self.assertEqual(self.data[0][0]['last-modified'], '2007-05-02')
-        self.assertEqual(self.data[0][0].last_modified, datetime.datetime(year=2007, month=5, day=2))
+        self.assertEqual(self.data[0][0].last_modified, datetime.datetime(year=2007, month=5, day=2, tzinfo=self.zone))
 
     def test_11(self):
         self.assertEqual(self.data[0][0].uid, 'guid1.example.com')
