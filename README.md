@@ -10,12 +10,11 @@ Installation
 -------------
 Install all dependencies by using the following commands:
 
-    pip install isodate
-    pip install BeautifulSoup4
+    pip install -r requirements.txt
 
 Install the parser by cloning the source from github.com:
 
-    git clone git://github.com/mback2k/python-hcalendar.git hcalendar
+    pip install git+https://github.com/mback2k/python-hcalendar.git
 
 Basic Example
 -------------
