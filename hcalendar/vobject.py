@@ -69,7 +69,9 @@ class vObject(object):
                     content = self.REGEX_DATE.sub(r'P\1Y\2M\3D', content)
                 value = isodate.parse_duration(content)
                 if isinstance(value, isodate.duration.Duration):
-                    self._duration[attr] = value.tdelta + datetime.timedelta(days=365*value.years) + datetime.timedelta(days=30*value.months)
+                    years = datetime.timedelta(days=int(365*value.years))
+                    months = datetime.timedelta(days=int(30*value.months))
+                    self._duration[attr] = value.tdelta + years + months
                 else:
                     self._duration[attr] = value
             else:
