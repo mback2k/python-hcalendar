@@ -11,7 +11,7 @@ class hCalendar(object):
             self._soup = self._soup.find(**{key: value})
         self._cals = self._soup.findAll(attrs='vcalendar')
         if self._cals:
-            self._cals = map(vCalendar, self._cals)
+            self._cals = list(map(vCalendar, self._cals))
         else:
             self._cals = [vCalendar(self._soup)]
 

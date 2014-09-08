@@ -3,7 +3,7 @@ from .vevent import vEvent
 class vCalendar(object):
     def __init__(self, soup):
         self._soup = soup
-        self._events = map(vEvent, self._soup.findAll(attrs='vevent'))
+        self._events = list(map(vEvent, self._soup.findAll(attrs='vevent')))
 
     def __str__(self):
         return str(self._soup)
