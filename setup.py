@@ -19,7 +19,7 @@ setup(
     include_package_data=True,
     url='https://github.com/mback2k/python-hcalendar',
     license='MIT',
-    description=u' '.join(__import__('hcalendar').__doc__.splitlines()).strip(),
+    description=' '.join(__import__('hcalendar').__doc__.splitlines()).strip(),
     install_requires=['isodate>=0.5.0', 'beautifulsoup4>=4.3.2'],
     classifiers=[
         'Intended Audience :: Developers',
