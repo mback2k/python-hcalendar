@@ -1,5 +1,10 @@
 from hcalendar import hCalendar
-import unittest, urllib2
+import unittest
+
+try:
+    import urllib.request as urllib2
+except:
+    import urllib2
 
 class UfXtractSetup(unittest.TestCase):
     def setUp(self):

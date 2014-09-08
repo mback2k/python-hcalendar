@@ -1,5 +1,9 @@
 from hcalendar import hCalendar
-import urllib2
+
+try:
+    import urllib.request as urllib2
+except:
+    import urllib2
 
 def parsePage(url):
     print '-'*79
