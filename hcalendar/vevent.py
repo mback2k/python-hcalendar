@@ -1,4 +1,4 @@
-from vobject import vObject
+from .vobject import vObject
 
 class vEvent(vObject):
     ATTR_CONTENT  = ('summary', 'description', 'location', 'category', 'status', 'method', 'uid', 'url')

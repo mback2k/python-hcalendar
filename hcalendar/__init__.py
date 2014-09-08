@@ -24,4 +24,4 @@ def get_version():
 __version__ = get_version()
 __all__ = ['hCalendar']
 
-from hcalendar import hCalendar
+from .hcalendar import hCalendar

@@ -1,5 +1,5 @@
 # Inspired by https://github.com/glennjones/UfXtract/blob/master/UfXtractUnitTests/test_hCalendar_3.cs
-from ufxtract_setup import UfXtractSetup
+from .ufxtract_setup import UfXtractSetup
 import isodate, datetime
 
 def timedelta(**kwargs):

@@ -1,4 +1,4 @@
-from vevent import vEvent
+from .vevent import vEvent
 
 class vCalendar(object):
     def __init__(self, soup):

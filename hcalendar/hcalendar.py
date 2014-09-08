@@ -1,4 +1,4 @@
-from vcalendar import vCalendar
+from .vcalendar import vCalendar
 from bs4 import BeautifulSoup
 
 class hCalendar(object):

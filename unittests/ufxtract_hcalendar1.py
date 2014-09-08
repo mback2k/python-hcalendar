@@ -1,5 +1,5 @@
 # Inspired by https://github.com/glennjones/UfXtract/blob/master/UfXtractUnitTests/test_hCalendar_1.cs
-from ufxtract_setup import UfXtractSetup
+from .ufxtract_setup import UfXtractSetup
 import isodate, datetime
 
 class hCalendar1(UfXtractSetup):

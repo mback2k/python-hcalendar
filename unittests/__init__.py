@@ -1,1 +1,1 @@
-from ufxtract import *
+from .ufxtract import *
