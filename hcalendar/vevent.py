@@ -5,6 +5,7 @@ class vEvent(vObject):
     ATTR_DATETIME = ('dtstart', 'dtend', 'dtstamp', 'last_modified', 'rdate', 'exdate')
     ATTR_DURATION = ('duration',)
     ATTR_RULE     = ('rrule', 'exrule')
+    ATTR_PATH     = ('uid',)
 
     ATTR_DATETIME_RELATION = {'duration': '+dtstart'}
     ATTR_DATETIME_FALLBACK = {'dtend': 'duration'}
@@ -22,8 +23,10 @@ class vEvent(vObject):
             value = self.getDuration(attr.replace('_', '-'))
         elif attr in self.ATTR_CONTENT:
             value = self.getContent(attr)
+            if not value and attr in self.ATTR_PATH:
+                value = self.getPath()
         else:
-            raise AttributeError
+            raise AttributeError('Unknown or unsupported attribute "%s".' % attr)
         return value
 
 class vRule(vObject):
