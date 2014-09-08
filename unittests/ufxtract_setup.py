@@ -12,7 +12,7 @@ class UfXtractSetup(unittest.TestCase):
         self.file = None
 
     def test_hcalendar(self):
-        self.assertIsNotNone(self.data)
+        self.assertTrue(self.data is not None)
 
     def test_vcalendar(self):
-        self.assertIsNotNone(self.data[0])
+        self.assertTrue(self.data[0] is not None)
