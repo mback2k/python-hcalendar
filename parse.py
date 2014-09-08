@@ -12,26 +12,26 @@ def parsePage(url):
             for attr in dir(event):
                 print '%s: %s' % (attr, repr(getattr(event, attr)))
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar2.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar3.htm')
+parsePage('http://web.archive.org/web/20140213063519/http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm')
+parsePage('http://web.archive.org/web/20130602094644/http://ufxtract.com/testsuite/hcalendar/hcalendar2.htm')
+parsePage('http://web.archive.org/web/20110830165439/http://ufxtract.com/testsuite/hcalendar/hcalendar3.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar4.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar5.htm')
+parsePage('http://web.archive.org/web/20110827224530/http://ufxtract.com/testsuite/hcalendar/hcalendar4.htm')
+parsePage('http://web.archive.org/web/20110828213628/http://ufxtract.com/testsuite/hcalendar/hcalendar5.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar6.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar7.htm')
+parsePage('http://web.archive.org/web/20110827233032/http://ufxtract.com/testsuite/hcalendar/hcalendar6.htm')
+parsePage('http://web.archive.org/web/20110828213623/http://ufxtract.com/testsuite/hcalendar/hcalendar7.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar8.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar9.htm')
+parsePage('http://web.archive.org/web/20110831030559/http://ufxtract.com/testsuite/hcalendar/hcalendar8.htm')
+parsePage('http://web.archive.org/web/20110802163338/http://ufxtract.com/testsuite/hcalendar/hcalendar9.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar10.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar11.htm')
+parsePage('http://web.archive.org/web/20110804082640/http://ufxtract.com/testsuite/hcalendar/hcalendar10.htm')
+parsePage('http://web.archive.org/web/20110831025245/http://ufxtract.com/testsuite/hcalendar/hcalendar11.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar12.htm')
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar13.htm')
+parsePage('http://web.archive.org/web/20110831052906/http://ufxtract.com/testsuite/hcalendar/hcalendar12.htm')
+parsePage('http://web.archive.org/web/20110830165503/http://ufxtract.com/testsuite/hcalendar/hcalendar13.htm')
 
-parsePage('http://ufxtract.com/testsuite/hcalendar/hcalendar14.htm')
+parsePage('http://web.archive.org/web/20130530044503/http://ufxtract.com/testsuite/hcalendar/hcalendar14.htm')
 
 parsePage('http://microformats.org/wiki/hcalendar')
 

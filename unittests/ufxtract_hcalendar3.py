@@ -13,7 +13,7 @@ def timedelta(**kwargs):
     return datetime.timedelta(**kwargs) 
 
 class hCalendar3(UfXtractSetup):
-    href = 'http://ufxtract.com/testsuite/hcalendar/hcalendar3.htm'
+    href = 'http://web.archive.org/web/20110830165439/http://ufxtract.com/testsuite/hcalendar/hcalendar3.htm'
     zone = isodate.parse_tzinfo('Z')
 
     def test_01(self):
