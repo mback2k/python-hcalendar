@@ -76,15 +76,15 @@ class vObject(object):
                 self._duration[attr] = None
         return self._duration[attr]
 
-    def getContent(self, attr, sep=None, all=False):
+    def getContent(self, attr, sep=''):
         if not attr in self._content:
             soup = self._soup.find(attrs=attr)
             if not soup:
                 return None
-            self._content[attr] = self.getContentFromSoup(soup, sep, all)
+            self._content[attr] = self.getContentFromSoup(soup, sep)
         return self._content[attr]
 
-    def getContentFromSoup(self, soup=None, sep=None, all=False):
+    def getContentFromSoup(self, soup=None, sep=''):
         if not soup:
             soup = self._soup
         subs = soup.findAll(attrs='value')
@@ -100,23 +100,5 @@ class vObject(object):
             elif elem.name in ['img', 'area'] and 'alt' in elem.attrs:
                 contents.append(elem['alt'])
             else:
-                contents.append(self.getContentFromInner(elem, all))
-        if not contents:
-            return ''
-        if sep:
-            return sep.join(contents)
-        return ''.join(contents)
-
-    def getContentFromInner(self, soup=None, all=False):
-        if not soup:
-            soup = self._soup
-        if soup.string:
-            return soup.string.strip().strip('"')
-        contents = []
-        for elem in soup.contents:
-            contents.append(self.getContentFromInner(elem, all))
-        if not contents:
-            return ''
-        if all:
-            return ''.join(contents)
-        return max(contents, key=len)
+                contents.append(''.join(elem.stripped_strings))
+        return sep.join(contents)
