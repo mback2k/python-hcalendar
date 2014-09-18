@@ -8,11 +8,11 @@ Dependencies
 
 Installation
 -------------
-Install all dependencies by using the following commands:
+Install the latest version from pypi.python.org:
 
-    pip install -r requirements.txt
+    pip install python-hcalendar
 
-Install the parser by cloning the source from github.com:
+Install the development version by cloning the source from github.com:
 
     pip install git+https://github.com/mback2k/python-hcalendar.git
 
@@ -54,3 +54,8 @@ TODO
 - Implement support for hCard contacts and attendees
 - Implement support for geo locations
 - Maybe support for other microformats?
+
+License
+-------
+* Released under MIT License
+* Copyright (c) 2012-2014 Marc Hoersken <info@marc-hoersken.de>
