@@ -4,8 +4,8 @@ python-hcalendar is a basic hCalendar parser
 
 __version_info__ = {
     'major': 0,
-    'minor': 1,
-    'micro': 4,
+    'minor': 2,
+    'micro': 0,
     'releaselevel': 'final',
 }
 
