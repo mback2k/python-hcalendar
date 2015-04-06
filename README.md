@@ -58,4 +58,4 @@ TODO
 License
 -------
 * Released under MIT License
-* Copyright (c) 2012-2014 Marc Hoersken <info@marc-hoersken.de>
+* Copyright (c) 2012-2015 Marc Hoersken <info@marc-hoersken.de>
