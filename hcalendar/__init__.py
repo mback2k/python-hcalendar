@@ -22,6 +22,10 @@ def get_version():
     return ''.join(vers)
 
 __version__ = get_version()
-__all__ = ['hCalendar']
 
-from .hcalendar import hCalendar
+try:
+    from .hcalendar import hCalendar
+except ImportError:
+    pass
+
+__all__ = ['hCalendar']
