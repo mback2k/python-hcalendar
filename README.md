@@ -21,7 +21,7 @@ Basic Example
 The hCalendar class accepts file-like objects and strings, basically anything supported by BeautifulSoup
 
     from hcalendar import hCalendar
-    
+
     html = """<div class="vcalendar"><div class="vevent">
      <a class="url" href="http://conferences.oreillynet.com/pub/w/40/program.html">
       http://conferences.oreillynet.com/pub/w/40/program.html
@@ -31,7 +31,7 @@ The hCalendar class accepts file-like objects and strings, basically anything su
      <abbr class="dtend" title="2005-10-07">7</abbr>,
      at the <span class="location">Argent Hotel, San Francisco, CA</span>
     </div></div>"""
-    
+
     hcal = hCalendar(html)
     for cal in hcal:
         for event in cal:
@@ -58,4 +58,4 @@ TODO
 License
 -------
 * Released under MIT License
-* Copyright (c) 2012-2015 Marc Hoersken <info@marc-hoersken.de>
+* Copyright (c) 2012-2016 Marc Hoersken <info@marc-hoersken.de>
