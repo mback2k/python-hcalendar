@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from hcalendar import hCalendar
 
 try:
@@ -6,15 +13,15 @@ except:
     import urllib2
 
 def parsePage(url):
-    print '-'*79
-    print url
+    print('-'*79)
+    print(url)
     file = urllib2.urlopen(urllib2.Request(url, headers={'User-agent': 'WebGCal'}))
     hcal = hCalendar(file)
     for cal in hcal:
         for event in cal:
-            print '-'*79
+            print('-'*79)
             for attr in dir(event):
-                print '%s: %s' % (attr, repr(getattr(event, attr)))
+                print('%s: %s' % (attr, repr(getattr(event, attr))))
 
 parsePage('http://web.archive.org/web/20140213063519/http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm')
 parsePage('http://web.archive.org/web/20130602094644/http://ufxtract.com/testsuite/hcalendar/hcalendar2.htm')

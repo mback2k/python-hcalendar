@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 # Inspired by https://github.com/glennjones/UfXtract/blob/master/UfXtractUnitTests/test_hCalendar_1.cs
 from .ufxtract_setup import UfXtractSetup
 import isodate, datetime
@@ -47,7 +54,7 @@ class hCalendar1(UfXtractSetup):
     def test_12(self):
         self.assertEqual(self.data[0][0].status.lower(), 'confirmed')
 
-# TODO: Implement geo location support        
+# TODO: Implement geo location support
 #    def test_13(self):
 #        self.assertIsNotNone(self.data[0][0].geo)
 

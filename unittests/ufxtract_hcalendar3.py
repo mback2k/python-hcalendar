@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 # Inspired by https://github.com/glennjones/UfXtract/blob/master/UfXtractUnitTests/test_hCalendar_3.cs
 from .ufxtract_setup import UfXtractSetup
 import isodate, datetime
@@ -10,7 +17,7 @@ def timedelta(**kwargs):
         days += 30 * kwargs.pop('months')
     if days:
         kwargs['days'] = days
-    return datetime.timedelta(**kwargs) 
+    return datetime.timedelta(**kwargs)
 
 class hCalendar3(UfXtractSetup):
     href = 'http://web.archive.org/web/20110830165439/http://ufxtract.com/testsuite/hcalendar/hcalendar3.htm'
