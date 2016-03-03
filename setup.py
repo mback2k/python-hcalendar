@@ -22,7 +22,7 @@ setup(
     version=__import__('hcalendar').__version__,
     author='Marc Hoersken',
     author_email='info@marc-hoersken.de',
-    packages=find_packages(),
+    packages=find_packages(exclude=['unittests']),
     include_package_data=True,
     url='https://github.com/mback2k/python-hcalendar',
     license='MIT',
