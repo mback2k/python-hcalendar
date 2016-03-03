@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+python-hcalendar is a basic hCalendar parser
+"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-
-"""
-python-hcalendar is a basic hCalendar parser
-"""
 
 __version_info__ = {
     'major': 0,
