@@ -12,10 +12,13 @@ install:
   - "pip install coverage pylint"
   - "pip install -r requirements.txt"
   - "pip install ."
+# command to run before tests
+before_script:
+  - "python -m compileall ."
 # command to run tests
 script:
   - "coverage run runtests.py"
-# command to report results
+# command to run after tests
 after_script:
   - "coverage report -m"
   - "pylint --py3k hcalendar"
