@@ -29,8 +29,8 @@ class vObject(object):
     def getPath(self):
         parents = self._soup.find_parents()
         parents.insert(0, self._soup)
-        path = map(lambda i: '%s[%d]' % (i.name, len(i.find_previous_siblings())), parents)
-        return '.'.join(reversed(path))
+        pathfmt = lambda e: '%s[%d]' % (e.name, len(e.find_previous_siblings()))
+        return '.'.join(reversed(map(pathfmt, parents)))
 
     def getDatetime(self, attr):
         if not attr in self._datetime:
