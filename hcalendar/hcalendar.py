@@ -13,7 +13,7 @@ class hCalendar(object):
         if isinstance(markup, BeautifulSoup):
             self._soup = markup
         else:
-            self._soup = BeautifulSoup(markup)
+            self._soup = BeautifulSoup(markup, 'html.parser')
         if value:
             self._soup = self._soup.find(**{key: value})
         self._cals = self._soup.findAll(attrs='vcalendar')
