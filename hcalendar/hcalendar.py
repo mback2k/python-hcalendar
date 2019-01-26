@@ -5,8 +5,9 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from .vcalendar import vCalendar
 from bs4 import BeautifulSoup
+
+from .vcalendar import vCalendar
 
 class hCalendar(object):
     def __init__(self, markup, value=None, key='id'):
