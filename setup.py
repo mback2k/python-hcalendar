@@ -6,6 +6,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from setuptools import setup, find_packages
+from hcalendar import __version__ as version
+from hcalendar import __doc__ as doc
 import os
 
 def read_file(filename):
@@ -19,14 +21,14 @@ def read_file(filename):
 
 setup(
     name='python-hcalendar',
-    version=__import__('hcalendar').__version__,
+    version=version,
     author='Marc Hoersken',
     author_email='info@marc-hoersken.de',
     packages=find_packages(exclude=['unittests']),
     include_package_data=True,
     url='https://github.com/mback2k/python-hcalendar',
     license='MIT',
-    description=' '.join(__import__('hcalendar').__doc__.splitlines()).strip(),
+    description=' '.join(doc.splitlines()).strip(),
     install_requires=['isodate>=0.5.0', 'beautifulsoup4>=4.3.2'],
     classifiers=[
         'Intended Audience :: Developers',
