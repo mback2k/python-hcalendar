@@ -11,7 +11,7 @@ from __future__ import unicode_literals
 __version_info__ = {
     'major': 0,
     'minor': 2,
-    'micro': 3,
+    'micro': 4,
     'releaselevel': 'final',
 }
 
