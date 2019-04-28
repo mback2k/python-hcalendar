@@ -10,7 +10,8 @@ from .ufxtract_setup import UfXtractSetup
 import isodate, datetime
 
 class hCalendar1(UfXtractSetup):
-    href = 'http://web.archive.org/web/20140213063519/http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm'
+    # Downloaded from http://web.archive.org/web/20140228135450id_/http://ufxtract.com/testsuite/hcalendar/hcalendar1.htm
+    href = 'https://dl.uxnr.de/user/archive/ufxtract/hCalendar1.htm'
     zone = isodate.parse_tzinfo('Z')
 
     def test_01(self):
@@ -35,7 +36,7 @@ class hCalendar1(UfXtractSetup):
         self.assertEqual(self.data[0][0].description, 'Barcamp is an ad-hoc gathering born from the desire to share and learn in an open environment.')
 
     def test_07(self):
-        self.assertEqual(self.data[0][0].url, 'http://web.archive.org/web/20140213063519/http://www.barcampbrighton.org/')
+        self.assertEqual(self.data[0][0].url, 'http://www.barcampbrighton.org/')
 
     def test_08(self):
         self.assertEqual(self.data[0][0]['class'].lower(), 'public')
